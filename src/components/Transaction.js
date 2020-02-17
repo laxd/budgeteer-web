@@ -3,33 +3,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
 import axios from 'axios';
+import {setTransactionCleared} from "../services/api/BudgeteerApi";
 
 export default function Transaction({ transaction }) {
 
     const [cleared, setCleared] = useState(transaction.cleared);
 
-    function handleCheck() {
-        setCleared(true);
+    function toggleCleared() {
+        setCleared(!cleared);
 
-        axios.put(process.env.REACT_APP_BUDGETEER_API + `/transactions/${transaction.id}`, {
-            cleared: true
-        }).then((res) => {
-            console.log("Updated transaction clear status");
-        }).catch(() => {
-            console.log("Failed to access URL");
-        });
-    }
-
-    function handleUncheck() {
-        setCleared(false);
-
-        axios.put(process.env.REACT_APP_BUDGETEER_API + `/transactions/${transaction.id}`, {
-            cleared: false
-        }).then((res) => {
-            console.log("Updated transaction clear status");
-        }).catch(() => {
-            console.log("Failed to access URL");
-        });
+        setTransactionCleared(transaction.id, cleared);
     }
 
     let icon;
@@ -38,10 +21,10 @@ export default function Transaction({ transaction }) {
         icon = <Button color="link"><FontAwesomeIcon icon={faCheckDouble} color="green"/></Button>
     }
     else if(cleared) {
-        icon = <Button color="link" onClick={handleUncheck}><FontAwesomeIcon icon={faCheck} color="green"/></Button>
+        icon = <Button color="link" onClick={toggleCleared}><FontAwesomeIcon icon={faCheck} color="green"/></Button>
     }
     else {
-        icon = <Button color="link" onClick={handleCheck}><FontAwesomeIcon icon={faCheck} color="lightgray"/></Button>
+        icon = <Button color="link" onClick={toggleCleared}><FontAwesomeIcon icon={faCheck} color="lightgray"/></Button>
     }
 
 

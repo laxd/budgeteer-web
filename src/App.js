@@ -1,23 +1,19 @@
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
 import './App.css';
-import TransactionList from './TransactionList';
-import Accounts from "./Accounts";
-import { AccountProvider } from './AccountContext'
+import BudgetView from './components/BudgetView'
+import BudgetSelection from './components/BudgetSelection';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends Component {
 
     render() {
         return (
-            <>
-            <AccountProvider>
-                <Accounts />
-                <TransactionList />
-            </AccountProvider>
-            <div>
-                <Button color="primary">Add new transaction</Button>
-            </div>
-            </>
+            <BrowserRouter>
+                <Switch>
+                    <Route path="/budgets/:id" component={BudgetView} />
+                    <Route path="/" component={BudgetSelection} />
+                </Switch>
+            </BrowserRouter>
         )
     }
 }

@@ -3,22 +3,16 @@ import axios from 'axios';
 import { Table } from 'reactstrap';
 import {AccountContext} from './AccountContext';
 import Transaction from "./Transaction";
+import {getTransactionsForAccount} from "../services/api/BudgeteerApi";
 
 const TransactionList = () => {
     const [transactions, setTransactions] = useState([]);
     const [account] = useContext(AccountContext);
 
     useEffect(() => {
-        // TODO: Refresh this when account changes
         if(account !== undefined) {
-            console.log(account);
-            // Fetch transactions for the given account
-            axios.get(process.env.REACT_APP_BUDGETEER_API + account.links.transactions)
-                .then(res => {
-                    const transactions = res.data;
-                    console.log(transactions);
-                    setTransactions(transactions);
-                });
+            getTransactionsForAccount(account)
+                .then((transactions => setTransactions(transactions)));
         }
     }, [account]);
 
