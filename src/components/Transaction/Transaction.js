@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
-import axios from 'axios';
-import {setTransactionCleared} from "../services/api/BudgeteerApi";
+import {setTransactionCleared} from "../../services/api/BudgeteerApi";
 
 export default function Transaction({ transaction }) {
 

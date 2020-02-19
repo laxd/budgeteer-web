@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import {Button} from 'reactstrap';
-import '../App.css';
-import TransactionList from './TransactionList';
-import Accounts from "./Accounts";
-import { AccountProvider } from './AccountContext'
-import AccountBalances from "./AccountBalances";
+import './App.css';
+import TransactionList from './Transaction/TransactionList';
+import AddTransaction from './Transaction/AddTransaction';
+import AccountSelection from "./Account/AccountSelection";
+import { AccountProvider } from './Account/AccountContext'
+import AccountBalances from "./Account/AccountBalances";
 
 class BudgetView extends Component {
 
@@ -12,13 +12,11 @@ class BudgetView extends Component {
         return (
             <>
             <AccountProvider>
-                <Accounts />
+                <AccountSelection />
                 <AccountBalances />
                 <TransactionList />
+                <AddTransaction />
             </AccountProvider>
-            <div>
-                <Button color="primary">Add new transaction</Button>
-            </div>
             </>
         )
     }

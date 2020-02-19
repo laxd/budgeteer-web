@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
-import BudgetView from './components/BudgetView'
-import BudgetSelection from './components/BudgetSelection';
+import BudgetView from './BudgetView'
+import BudgetSelection from './Budget/BudgetSelection';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 class App extends Component {

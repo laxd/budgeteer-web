@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react'
 import Budget from "./Budget";
-import { getBudgets } from "../services/api/BudgeteerApi";
+import { getBudgets } from "../../services/api/BudgeteerApi";
 
-const BudgetSelection = () => {
+function BudgetSelection() {
     const [budgets, setBudgets] = useState([]);
 
     useEffect(() => {
@@ -17,6 +17,6 @@ const BudgetSelection = () => {
             ))}
         </ol>
     );
-};
+}
 
 export default BudgetSelection;
