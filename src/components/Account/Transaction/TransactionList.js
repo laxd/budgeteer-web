@@ -1,12 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Table } from 'reactstrap';
-import {AccountContext} from '../Account/AccountContext';
+import {AccountContext} from '../AccountContext';
 import Transaction from "./Transaction";
-import {getTransactionsForAccount} from "../../services/api/BudgeteerApi";
+import {getTransactionsForAccount} from "../../../services/api/BudgeteerApi";
 
-function TransactionList() {
+function TransactionList({account}) {
     const [transactions, setTransactions] = useState([]);
-    const [account] = useContext(AccountContext);
 
     useEffect(() => {
         if(account !== undefined) {
@@ -18,7 +17,7 @@ function TransactionList() {
     if(account === undefined) {
         return <div>Select an account to see transactions!</div>
     }
-    
+
     return (
         <>
             <Table>

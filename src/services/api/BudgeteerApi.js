@@ -3,8 +3,8 @@ import axios from 'axios';
 const getBudgets = () => {
     return axios.get(process.env.REACT_APP_BUDGETEER_API + "/budgets")
         .then(res => {
-            console.log(res.data.data);
-            return res.data.data;
+            console.log(res.data);
+            return res.data;
         });
 };
 

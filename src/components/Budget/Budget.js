@@ -1,14 +1,23 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link} from 'react-router-dom';
+import {BudgetContext} from "./BudgetContext";
+import {Button} from "reactstrap";
 
-function Budget({ budget }) {
+function Budget({budget}) {
+    const [selectedBudget, setBudget] = useContext(BudgetContext);
+
+    console.log(budget);
+
+
+
+    const handleSelection = () => {
+        setBudget(budget);
+    };
 
     return (
-        <Link to={budget.links.self}>
-            <li>
-                {budget.name}
-            </li>
-        </Link>
+        <li>
+            <Button onClick={handleSelection}>{budget.name}</Button>
+        </li>
     );
 }
 

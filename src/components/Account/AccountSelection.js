@@ -1,36 +1,26 @@
-import React, { useEffect, useState, useContext } from 'react'
-import Account from './Account';
-import { AccountContext } from './AccountContext';
-import './Accounts.css';
-import {getAccountsForBudget} from "../../services/api/BudgeteerApi";
+import React  from 'react'
+import {Button} from "reactstrap";
+import classnames from 'classnames'
+import {getAccount} from "../../services/api/BudgeteerApi";
 
-function AccountList() {
-    const [selectedAccount, setAccount] = useContext(AccountContext);
-    const [accounts, setAccounts] = useState([]);
+function Account({ account, setAccount }) {
 
-    useEffect(() => {
-        getAccountsForBudget(123)
-            .then(accounts => {
-                setAccounts(accounts);
+    const handleAccountSelection = () => {
+        // Get more detailed information about this account
+        // and propagate
+        getAccount(account.id)
+            .then(a => setAccount(a));
+    };
 
-                if(accounts.length > 0) {
-                    // Set the first one as selected
-                    setAccount(accounts[0])
-                }
-            });
-    }, []);
+    const getButtonColor = () => {
+        return "primary";
+    };
 
     return (
-        <>
-        <div className="AccountsContainer">
-            <ul>
-                {accounts.map(account => (
-                    <Account key={account.id} account={account} />
-                ))}
-            </ul>
-        </div>
-        </>
+        <li>
+            <Button color={getButtonColor()} onClick={handleAccountSelection}>{account.name}</Button>
+        </li>
     );
 }
 
-export default AccountList;
+export default Account;

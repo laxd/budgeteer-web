@@ -6,8 +6,12 @@ function BudgetSelection() {
     const [budgets, setBudgets] = useState([]);
 
     useEffect(() => {
+        console.log("Getting budgets...");
         getBudgets()
-            .then(setBudgets);
+            .then(budgets => {
+                console.log(budgets);
+                setBudgets(budgets)
+            });
     }, []);
 
     return (
