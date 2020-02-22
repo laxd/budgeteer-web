@@ -1,9 +1,8 @@
 import React  from 'react'
 import {Button} from "reactstrap";
-import classnames from 'classnames'
 import {getAccount} from "../../services/api/BudgeteerApi";
 
-function Account({ account, setAccount }) {
+function AccountSelection({ account, setAccount }) {
 
     const handleAccountSelection = () => {
         // Get more detailed information about this account
@@ -23,4 +22,4 @@ function Account({ account, setAccount }) {
     );
 }
 
-export default Account;
+export default AccountSelection;

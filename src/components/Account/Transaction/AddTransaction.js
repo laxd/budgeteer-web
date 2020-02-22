@@ -21,12 +21,10 @@ export default function AddTransaction() {
     };
 
     const handleClick = () => {
-        console.log("Adding...");
         setAdding((a) => !a);
     };
 
     const handleSave = () => {
-        console.log("Saving...");
         const transaction = {
             date: transactionDate,
             vendor: vendor,
@@ -34,9 +32,8 @@ export default function AddTransaction() {
             cleared: false
         };
 
-
-
         console.log(transaction);
+        // TODO: Save change here
     };
 
     let addField;

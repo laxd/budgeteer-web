@@ -1,14 +1,7 @@
-import React, {useContext} from 'react'
-import {Link} from 'react-router-dom';
-import {BudgetContext} from "./BudgetContext";
+import React from 'react'
 import {Button} from "reactstrap";
 
-function Budget({budget}) {
-    const [selectedBudget, setBudget] = useContext(BudgetContext);
-
-    console.log(budget);
-
-
+function Budget({budget, setBudget}) {
 
     const handleSelection = () => {
         setBudget(budget);

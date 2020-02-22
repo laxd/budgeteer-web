@@ -1,26 +1,12 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React from 'react'
 import Budget from "./Budget";
-import { getBudgets } from "../../services/api/BudgeteerApi";
 
-function BudgetSelection() {
-    const [budgets, setBudgets] = useState([]);
-
-    useEffect(() => {
-        console.log("Getting budgets...");
-        getBudgets()
-            .then(budgets => {
-                console.log(budgets);
-                setBudgets(budgets)
-            });
-    }, []);
-
+export default function BudgetSelection({budgets, setBudget}) {
     return (
         <ol>
             {budgets.map(b => (
-                <Budget key={b.id} budget={b} />
+                <Budget key={b.id} budget={b} setBudget={setBudget} />
             ))}
         </ol>
     );
 }
-
-export default BudgetSelection;

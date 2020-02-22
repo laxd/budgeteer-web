@@ -3,23 +3,20 @@ import axios from 'axios';
 const getBudgets = () => {
     return axios.get(process.env.REACT_APP_BUDGETEER_API + "/budgets")
         .then(res => {
-            console.log(res.data);
             return res.data;
         });
 };
 
-const getAccountsForBudget = (id) => {
-    return axios.get(process.env.REACT_APP_BUDGETEER_API + '/accounts')
+const getAccountsForBudget = (budget) => {
+    return axios.get(process.env.REACT_APP_BUDGETEER_API + budget.links.accounts)
         .then(res => {
-            console.log(res.data.data);
-            return res.data.data;
+            return res.data;
         });
 };
 
 const getAccount = (id) => {
     return axios.get(process.env.REACT_APP_BUDGETEER_API + `/accounts/${id}`)
         .then(res => {
-            console.log(res.data);
             return res.data;
         });
 };
