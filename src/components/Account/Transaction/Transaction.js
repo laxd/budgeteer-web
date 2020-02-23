@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
-import {setTransactionCleared} from "../../../services/api/BudgeteerApi";
+import BudgeteerApi from "../../../services/api/BudgeteerApi";
 
 export default function Transaction({ transaction }) {
 
@@ -11,7 +11,7 @@ export default function Transaction({ transaction }) {
     function toggleCleared() {
         setCleared(!cleared);
 
-        setTransactionCleared(transaction.id, cleared);
+        BudgeteerApi.setTransactionCleared(transaction.id, cleared);
     }
 
     let icon;

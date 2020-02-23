@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {Button} from 'reactstrap';
+import BudgeteerApi from '../../../services/api/BudgeteerApi'
 
-export default function AddTransaction() {
+export default function AddTransaction({account}) {
     const [transactionDate, setTransactionDate] = useState(new Date());
     const [vendor, setVendor] = useState('');
     const [amount, setAmount] = useState(0);
@@ -20,7 +21,7 @@ export default function AddTransaction() {
         setTransactionDate(event.target.value);
     };
 
-    const handleClick = () => {
+    const toggleAdding = () => {
         setAdding((a) => !a);
     };
 
@@ -29,28 +30,25 @@ export default function AddTransaction() {
             date: transactionDate,
             vendor: vendor,
             amount: amount,
-            cleared: false
+            cleared: false,
+            accountId: account.id
         };
 
         console.log(transaction);
-        // TODO: Save change here
+
+        BudgeteerApi.addTransaction(transaction);
     };
 
-    let addField;
     if(adding) {
-        addField = <div>
+        return <div>
             <input value={transactionDate} onChange={handleDateChange} type="date" />
             <input value={vendor} onChange={handleVendorChange} />
             <input value={amount} onChange={handleAmountChange} />
-            <Button>Cancel</Button>
+            <Button onChange={toggleAdding}>Cancel</Button>
             <Button onClick={handleSave} color="primary">Save</Button>
         </div>
     }
-
-    return (
-        <div>
-            {addField}
-            <Button onClick={handleClick} color="primary">Add new transaction</Button>
-        </div>
-    );
+    else {
+        return <Button onClick={toggleAdding} color="primary">Add new transaction</Button>
+    }
 }

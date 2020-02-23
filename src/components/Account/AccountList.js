@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Account from './AccountSelection';
 import './Accounts.css';
-import {getAccountsForBudget} from "../../services/api/BudgeteerApi";
+import BudgeteerApi from "../../services/api/BudgeteerApi";
 
 function AccountList({budget, setAccount}) {
     const [accounts, setAccounts] = useState(undefined);
@@ -11,9 +11,16 @@ function AccountList({budget, setAccount}) {
             return;
         }
 
-        getAccountsForBudget(budget)
-            .then(accounts => {
+        BudgeteerApi.getAccountsForBudget(budget)
+            .then(async (accounts) => {
                 setAccounts(accounts);
+
+                await Promise.all(accounts.map(async (account) => {
+                    return BudgeteerApi.getTransactionsForAccount(account)
+                    .then(transactions => {
+                        account.transactions = transactions;
+                    });
+                }))
 
                 if(accounts.length > 0) {
                     setAccount(accounts[0]);

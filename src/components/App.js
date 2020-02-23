@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.css';
 import BudgetSelection from './Budget/BudgetSelection';
-import {getBudgets, getAccountsForBudget} from "../services/api/BudgeteerApi";
+import BudgeteerApi from "../services/api/BudgeteerApi";
 import MenuBar from './MenuBar'
 import BudgetView from './BudgetView';
 
@@ -25,12 +25,12 @@ class App extends Component {
     }
 
     componentDidMount() {
-        getBudgets()
+        BudgeteerApi.getBudgets()
             .then(b => this.setBudgets(b));
     }
 
     setBudget = async (budget) => {
-        const accounts = await getAccountsForBudget(budget.id);
+        const accounts = await BudgeteerApi.getAccountsForBudget(budget.id);
         budget.accounts = accounts;
 
         this.setState({

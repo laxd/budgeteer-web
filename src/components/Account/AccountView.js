@@ -7,7 +7,7 @@ export default function AccountView({ account }) {
     return (
         <>
             <TransactionList account={account} />
-            <AddTransaction />
+            <AddTransaction account={account} />
         </>
     )
 }
