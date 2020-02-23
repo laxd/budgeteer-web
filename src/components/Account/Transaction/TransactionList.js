@@ -2,12 +2,10 @@ import React from 'react'
 import { Table } from 'reactstrap';
 import Transaction from "./Transaction";
 
-function TransactionList({account}) {
-    if(account === undefined) {
-        return <div>Select an account to see transactions!</div>
-    }
+function TransactionList({transactions}) {
+    console.log("Rerendering transaction list")
 
-    if(!account.transactions) {
+    if(!transactions) {
         return (
             <div>Loading...</div>
         )
@@ -25,7 +23,7 @@ function TransactionList({account}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {account.transactions.map(transaction => (
+                    {transactions.map(transaction => (
                         <Transaction key={transaction.id} transaction={transaction} />
                     ))}
                 </tbody>

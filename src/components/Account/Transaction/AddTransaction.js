@@ -36,7 +36,10 @@ export default function AddTransaction({account}) {
 
         console.log(transaction);
 
-        BudgeteerApi.addTransaction(transaction);
+        BudgeteerApi.addTransaction(transaction)
+            .then((transaction) => {
+                account.transactions.push(transaction);
+            })
     };
 
     if(adding) {

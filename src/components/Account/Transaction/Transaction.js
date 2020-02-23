@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
 import BudgeteerApi from "../../../services/api/BudgeteerApi";
+import { formatCurrency, formatDate } from '../../../utils/Formatter';
 
 export default function Transaction({ transaction }) {
 
@@ -29,16 +30,9 @@ export default function Transaction({ transaction }) {
 
     return (
         <tr>
-            <td>{new Intl.DateTimeFormat("en-GB", {
-                year: "numeric",
-                month: "long",
-                day: "2-digit"
-            }).format(new Date(transaction.date))}</td>
+            <td>{formatDate(transaction.date)}</td>
             <td>{transaction.vendor }</td>
-            <td>{new Intl.NumberFormat("en-GB", {
-                style: "currency",
-                currency: "GBP"
-            }).format(transaction.amount)}</td>
+            <td>{formatCurrency(transaction.amount)}</td>
             <td>{icon}</td>
         </tr>
     )
