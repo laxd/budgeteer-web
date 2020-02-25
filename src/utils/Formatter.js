@@ -22,7 +22,7 @@ const formatDate = (date) => {
 
     return new Intl.DateTimeFormat("en-GB", {
         year: "numeric",
-        month: "long",
+        month: "2-digit",
         day: "2-digit"
     }).format(dateToFormat);
 }

@@ -6,3 +6,23 @@ ul li {
     display: inline-block;
     padding: 10px;
 }
+
+.balance > * {
+    display: inline-block;
+}
+
+.balance-positive, .transaction-credit {
+    color: green
+}
+
+.balance-negative, .transaction-debit {
+    color: red
+}
+
+.balance-positive {
+    font-size: 20px;
+}
+
+.balance-negative {
+    font-size: 20px;
+}

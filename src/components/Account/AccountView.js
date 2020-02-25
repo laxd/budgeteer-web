@@ -14,7 +14,7 @@ export default function AccountView({ account }) {
 
     return (
         <>
-            <div>Current balance: {formatCurrency(account.balance)}</div>
+            <AccountBalance transactions={transactions} />
             <TransactionList transactions={transactions} />
             <AddTransaction account={account} addTransaction={addTransaction}/>
         </>
