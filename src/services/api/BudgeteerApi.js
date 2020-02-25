@@ -38,7 +38,7 @@ class BudgeteerApi {
     addTransaction(transaction) {
         return axios.post(process.env.REACT_APP_BUDGETEER_API + '/transactions', transaction)
         .then(res => {
-            return res;
+            return res.data;
         }).catch(err => console.log(err.message));
     }
 }

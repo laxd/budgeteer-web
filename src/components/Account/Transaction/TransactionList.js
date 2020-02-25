@@ -3,8 +3,6 @@ import { Table } from 'reactstrap';
 import Transaction from "./Transaction";
 
 function TransactionList({transactions}) {
-    console.log("Rerendering transaction list")
-
     if(!transactions) {
         return (
             <div>Loading...</div>

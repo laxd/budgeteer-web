@@ -9,10 +9,17 @@ export default function Transaction({ transaction }) {
 
     const [cleared, setCleared] = useState(transaction.cleared);
 
-    function toggleCleared() {
-        setCleared(!cleared);
+    function clearTransaction() {
+        setCleared(true);
 
-        BudgeteerApi.setTransactionCleared(transaction.id, cleared);
+        BudgeteerApi.setTransactionCleared(transaction.id, true);
+    }
+
+    function unclearTransaction() {
+        setCleared(false);
+
+        BudgeteerApi.setTransactionCleared(transaction.id, false);
+
     }
 
     let icon;
@@ -21,12 +28,11 @@ export default function Transaction({ transaction }) {
         icon = <Button color="link"><FontAwesomeIcon icon={faCheckDouble} color="green"/></Button>
     }
     else if(cleared) {
-        icon = <Button color="link" onClick={toggleCleared}><FontAwesomeIcon icon={faCheck} color="green"/></Button>
+        icon = <Button color="link" onClick={unclearTransaction}><FontAwesomeIcon icon={faCheck} color="green"/></Button>
     }
     else {
-        icon = <Button color="link" onClick={toggleCleared}><FontAwesomeIcon icon={faCheck} color="lightgray"/></Button>
+        icon = <Button color="link" onClick={clearTransaction}><FontAwesomeIcon icon={faCheck} color="lightgray"/></Button>
     }
-
 
     return (
         <tr>

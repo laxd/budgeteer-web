@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button} from 'reactstrap';
 import BudgeteerApi from '../../../services/api/BudgeteerApi'
 
-export default function AddTransaction({account}) {
+export default function AddTransaction({account, addTransaction}) {
     const [transactionDate, setTransactionDate] = useState(new Date());
     const [vendor, setVendor] = useState('');
     const [amount, setAmount] = useState(0);
@@ -38,7 +38,7 @@ export default function AddTransaction({account}) {
 
         BudgeteerApi.addTransaction(transaction)
             .then((transaction) => {
-                account.transactions.push(transaction);
+                addTransaction(transaction);
             })
     };
 
