@@ -4,6 +4,8 @@ import BudgetSelection from './Budget/BudgetSelection';
 import BudgeteerApi from "../services/api/BudgeteerApi";
 import MenuBar from './MenuBar'
 import BudgetView from './BudgetView';
+import ErrorBoundary from './ErrorBoundary';
+import { ToastContainer } from 'react-toastify';
 
 class App extends Component {
 
@@ -26,7 +28,7 @@ class App extends Component {
 
     componentDidMount() {
         BudgeteerApi.getBudgets()
-            .then(b => this.setBudgets(b));
+            .then(b => this.setBudgets(b))
     }
 
     setBudget = async (budget) => {
@@ -39,22 +41,18 @@ class App extends Component {
     }
 
     render() {
-        if(this.state.selectedBudget === undefined) {
-            return (
-                <>
-                    <MenuBar budget={this.state.selectedBudget} />   
+
+        return <>
+            <ErrorBoundary>
+                <ToastContainer />
+                <MenuBar budget={this.state.selectedBudget} />   
+                {this.state.selectedBudget === undefined ?
                     <BudgetSelection budgets={this.state.budgets} setBudget={this.state.setBudget}/>
-                </>
-            )
-        }
-        else {
-            return (
-                <>                    
-                    <MenuBar budget={this.state.selectedBudget} />   
+                :
                     <BudgetView budget={this.state.selectedBudget}/>
-                </>
-            )
-        }
+            }
+            </ErrorBoundary>
+        </>
     }
 }
 

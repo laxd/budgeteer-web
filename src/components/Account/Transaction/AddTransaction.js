@@ -14,7 +14,6 @@ export default function AddTransaction({account, addTransaction}) {
     const [adding, setAdding] = useState(false);
 
     const handleChange = (event) => {
-        console.log(event.target.name)
         setTransaction({
             ...transaction,
             [event.target.name]: event.target.value
@@ -39,9 +38,11 @@ export default function AddTransaction({account, addTransaction}) {
             <input name="transactionDate" value={transaction.transactionDate} onChange={handleChange} type="date" />
             <input name="vendor" value={transaction.vendor} onChange={handleChange} />
             <input name="amount" value={transaction.amount} onChange={handleChange} />
-            <div><Button onClick={toggleAdding}>Cancel</Button>
-            <Button onClick={handleSave} color="primary">Save</Button>
-        </div></div>
+            <div>
+                <Button onClick={toggleAdding}>Cancel</Button>
+                <Button onClick={handleSave} color="primary">Save</Button>
+            </div>
+        </div>
     }
     else {
         return <Button onClick={toggleAdding} color="primary">Add new transaction</Button>

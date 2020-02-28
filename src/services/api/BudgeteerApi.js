@@ -1,10 +1,14 @@
 import axios from 'axios';
+import handleError from '../ErrorHandler';
 
 class BudgeteerApi {
     getBudgets() {
         return axios.get(process.env.REACT_APP_BUDGETEER_API + "/budgets")
             .then(res => {
                 return res.data;
+            }).catch(err => {
+                handleError(err);
+                return [];
             });
     };
     
@@ -39,7 +43,7 @@ class BudgeteerApi {
         return axios.post(process.env.REACT_APP_BUDGETEER_API + '/transactions', transaction)
         .then(res => {
             return res.data;
-        }).catch(err => console.log(err.message));
+        });
     }
 }
 

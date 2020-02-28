@@ -3,6 +3,7 @@ import { formatCurrency } from '../../utils/Formatter'
 import classNames from 'classnames';
 
 function AccountBalance({transactions}) {
+    console.log(transactions);
     const balance = transactions
         .map(t => parseFloat(t.amount))
         .reduce((total, amount) => {
