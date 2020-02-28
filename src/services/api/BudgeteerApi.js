@@ -2,8 +2,15 @@ import axios from 'axios';
 import handleError from '../ErrorHandler';
 
 class BudgeteerApi {
+
+    constructor() {
+        this.api = axios.create({
+            baseURL: process.env.REACT_APP_BUDGETEER_API
+        });
+    }
+
     getBudgets() {
-        return axios.get(process.env.REACT_APP_BUDGETEER_API + "/budgets")
+        return this.api.get("/budgets")
             .then(res => {
                 return res.data;
             }).catch(err => {
@@ -13,36 +20,48 @@ class BudgeteerApi {
     };
     
     getAccountsForBudget(budget) {
-        return axios.get(process.env.REACT_APP_BUDGETEER_API + budget.links.accounts)
+        return this.api.get(budget.links.accounts)
             .then(res => {
                 return res.data;
+            }).catch(err => {
+                handleError(err);
+                return [];
             });
     };
     
     getAccount(id) {
-        return axios.get(process.env.REACT_APP_BUDGETEER_API + `/accounts/${id}`)
+        return this.api.get(`/accounts/${id}`)
             .then(res => {
                 return res.data;
+            }).catch(err => {
+                handleError(err);
+                return undefined;
             });
     };
     
     getTransactionsForAccount(account) {
-        return axios.get(process.env.REACT_APP_BUDGETEER_API + account.links.transactions)
+        return this.api.get(account.links.transactions)
             .then(res => {
                 return res.data;
+            }).catch(err => {
+                handleError(err);
+                return [];
             });
     };
     
     setTransactionCleared(id, cleared) {
-        return axios.put(process.env.REACT_APP_BUDGETEER_API + `/transactions/${id}`, {
+        return this.api.put(`/transactions/${id}`, {
             cleared: cleared
-        });
+        }).catch(err => handleError(err));
     };
     
     addTransaction(transaction) {
-        return axios.post(process.env.REACT_APP_BUDGETEER_API + '/transactions', transaction)
+        return this.api.post('/transactions', transaction)
         .then(res => {
             return res.data;
+        }).catch(err => {
+            handleError(err);
+            return undefined;
         });
     }
 }
