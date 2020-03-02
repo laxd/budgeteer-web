@@ -1,6 +1,7 @@
 import React from 'react';
 import { formatCurrency } from '../../utils/Formatter'
 import classNames from 'classnames';
+import './Accounts.css';
 
 function AccountBalance({transactions}) {
     console.log(transactions);
@@ -9,11 +10,11 @@ function AccountBalance({transactions}) {
         .reduce((total, amount) => {
             return total += amount;
         });
-
+    
     const clearedBalance = transactions
-    .filter(t => t.cleared)
-    .map(t => t.amount)
-    .reduce((total, amount) => total + amount);
+        .filter(t => t.cleared)
+        .map(t => t.amount)
+        .reduce((total, amount) => total + amount);
 
     const balanceClass = classNames({
         'balance': true,
@@ -28,14 +29,14 @@ function AccountBalance({transactions}) {
     })
 
     return (
-        <>
+        <div className="balance-container">
             <div className="balance">
-                <div>Balance:</div><div className={balanceClass}>{formatCurrency(balance)}</div>
+                <div className="balance-name">Balance:</div><div className={balanceClass}>{formatCurrency(balance)}</div>
             </div>
             <div className="balance">
-                <div>Cleared:</div><div className={clearedClass}>{formatCurrency(clearedBalance)}</div>
+                <div className="balance-name">Cleared:</div><div className={clearedClass}>{formatCurrency(clearedBalance)}</div>
             </div>
-        </>
+        </div>
     )
 }
 

@@ -7,8 +7,19 @@ ul li {
     padding: 10px;
 }
 
-.balance > * {
-    display: inline-block;
+.balance-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 500px;
+    margin: auto;
+}
+
+.balance {
+    display: flex;
+}
+
+.balance-name {
+    padding-right: 5px;
 }
 
 .balance-positive, .transaction-credit {
