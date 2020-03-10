@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'reactstrap';
@@ -6,7 +7,7 @@ import BudgeteerApi from "../../../services/api/BudgeteerApi";
 import { formatCurrency, formatDate } from '../../../utils/Formatter';
 import classNames from 'classnames';
 
-export default function Transaction({ transaction }) {
+function Transaction({ transaction }) {
 
     const [cleared, setCleared] = useState(transaction.cleared);
 
@@ -41,12 +42,27 @@ export default function Transaction({ transaction }) {
         'transaction-debit': transaction.amount < 0
     });
 
+    console.log(transaction.category === undefined);
+
     return (
-        <div className="transaction">
-            <div className="transaction-description">{transaction.vendor}</div>
-            <div className="transaction-date">{formatDate(transaction.date)}</div>
-            <div className={amountClass}>{formatCurrency(transaction.amount)}</div>
-            <div className="transaction-status">{icon}</div>
-        </div>
+        <tr>
+            <td>{transaction.vendor}</td>
+            <td>{formatDate(transaction.date)}</td>
+            <td>{transaction.category === undefined ?
+                "No category defined" :
+                transaction.category.name}</td>
+            <td className={amountClass}>{formatCurrency(transaction.amount)}</td>
+            <td>{icon}</td>
+        </tr>
     )
 }
+
+Transaction.propTypes = {
+    transaction: PropTypes.shape({
+        vendor: PropTypes.string,
+        date: PropTypes.number,
+        amount: PropTypes.number
+    })
+};
+
+export default Transaction

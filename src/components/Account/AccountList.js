@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Account from './AccountSelection';
+import AccountSelection from './AccountSelection';
 import './Accounts.css';
 import BudgeteerApi from "../../services/api/BudgeteerApi";
 
@@ -20,9 +20,13 @@ function AccountList({budget, setAccount}) {
                     .then(transactions => {
                         account.transactions = transactions;
                     });
-                }))
+                }));
+
+                console.log("Got all accounts for budget");
+                console.log(accounts);
 
                 if(accounts.length > 0) {
+                    console.log(accounts[0]);
                     setAccount(accounts[0]);
                 }
             });
@@ -37,7 +41,7 @@ function AccountList({budget, setAccount}) {
         <div className="AccountsContainer">
             <ul>
                 {accounts.map(account => (
-                    <Account key={account.id} account={account} setAccount={setAccount} />
+                    <AccountSelection key={account.id} account={account} setAccount={setAccount} />
                 ))}
             </ul>
         </div>

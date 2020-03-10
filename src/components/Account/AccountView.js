@@ -10,7 +10,7 @@ export default function AccountView({ account }) {
 
     const addTransaction = (transaction) => {
         setTransactions(transactions => transactions.concat(transaction))
-    }
+    };
 
     return (
         <>

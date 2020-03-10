@@ -8,15 +8,20 @@ const formatCurrency = (value) => {
         style: "currency",
         currency: "GBP"
     }).format(value);
-}
+};
 
 const formatDate = (date) => {
     let dateToFormat;
 
-    if(date == typeof Date) {
+    if(date instanceof Date) {
         dateToFormat = date;
     }
+    else if(typeof date === 'number') {
+        // Assume date is a unix timestamp
+        dateToFormat = new Date(date * 1000);
+    }
     else {
+        // Try to parse it as a string?
         dateToFormat = new Date(date);
     }
 
@@ -25,7 +30,7 @@ const formatDate = (date) => {
         month: "2-digit",
         day: "2-digit"
     }).format(dateToFormat);
-}
+};
 
 const formatDatetime = (date) => {
     return new Intl.DateTimeFormat("en-GB", {
@@ -35,7 +40,7 @@ const formatDatetime = (date) => {
         hour: "2-digit",
         minute: "2-digit"
     }).format(new Date(date));
-}
+};
 
 module.exports = {
     formatCurrency,

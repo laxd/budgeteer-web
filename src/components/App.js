@@ -26,19 +26,19 @@ class App extends Component {
         }
     }
 
-    componentDidMount() {
-        BudgeteerApi.getBudgets()
-            .then(b => this.setBudgets(b))
+    async componentDidMount() {
+        const budgets = await BudgeteerApi.getBudgets();
+
+        this.setBudgets(budgets);
     }
 
     setBudget = async (budget) => {
-        const accounts = await BudgeteerApi.getAccountsForBudget(budget.id);
-        budget.accounts = accounts;
+        budget.accounts = await BudgeteerApi.getAccountsForBudget(budget.id);
 
         this.setState({
             selectedBudget: budget
         });
-    }
+    };
 
     render() {
 
