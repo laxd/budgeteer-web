@@ -1,24 +1,13 @@
 import React  from 'react'
-import {Button} from "reactstrap";
-import BudgeteerApi from "../../services/api/BudgeteerApi";
 
 function AccountSelection({ account, setAccount }) {
 
     const handleAccountSelection = () => {
-        // Get more detailed information about this account
-        // and propagate
-        BudgeteerApi.getAccount(account.id)
-            .then(a => setAccount(a));
-    };
-
-    const getButtonColor = () => {
-        return "primary";
+        setAccount(account);
     };
 
     return (
-        <li>
-            <Button color={getButtonColor()} onClick={handleAccountSelection}>{account.name}</Button>
-        </li>
+        <button className="account-list-item" onClick={handleAccountSelection}>{account.name}</button>
     );
 }
 

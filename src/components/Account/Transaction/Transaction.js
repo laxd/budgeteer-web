@@ -42,8 +42,6 @@ function Transaction({ transaction }) {
         'transaction-debit': transaction.amount < 0
     });
 
-    console.log(transaction.category === undefined);
-
     return (
         <tr>
             <td>{transaction.vendor}</td>

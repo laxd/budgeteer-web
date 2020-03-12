@@ -28,12 +28,7 @@ class BudgeteerApi {
     };
 
     async getAccount(id) {
-        const account = await this.api.get(`/accounts/${id}`).data;
-
-        account.transactions = await this.api.get(account.links.transactions);
-
-        console.log("Retrieving account: " + id);
-        return account;
+        return await this.api.get(`/accounts/${id}`).data;
     };
 
     getTransactionsForAccount(account) {

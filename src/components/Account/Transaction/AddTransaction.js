@@ -61,7 +61,7 @@ function AddTransaction({account, addTransaction}) {
 }
 
 AddTransaction.propTypes = {
-    addTransaction: PropTypes.function
+    account: PropTypes.object
 };
 
 export default AddTransaction;

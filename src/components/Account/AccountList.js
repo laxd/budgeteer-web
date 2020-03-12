@@ -15,18 +15,7 @@ function AccountList({budget, setAccount}) {
             .then(async (accounts) => {
                 setAccounts(accounts);
 
-                await Promise.all(accounts.map(async (account) => {
-                    return BudgeteerApi.getTransactionsForAccount(account)
-                    .then(transactions => {
-                        account.transactions = transactions;
-                    });
-                }));
-
-                console.log("Got all accounts for budget");
-                console.log(accounts);
-
                 if(accounts.length > 0) {
-                    console.log(accounts[0]);
                     setAccount(accounts[0]);
                 }
             });
@@ -40,11 +29,11 @@ function AccountList({budget, setAccount}) {
         <>
         <div className="account-list">
             Accounts:
-            <ul>
+            <div className="account-list-container">
                 {accounts.map(account => (
                     <AccountSelection key={account.id} account={account} setAccount={setAccount} />
                 ))}
-            </ul>
+            </div>
         </div>
         </>
     );

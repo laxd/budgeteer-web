@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import './Accounts.css';
 
 function AccountBalance({transactions}) {
-    console.log(transactions);
     const balance = transactions
         .map(t => parseFloat(t.amount))
         .reduce((total, amount) => total + amount, 0);
