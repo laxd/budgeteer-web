@@ -45,12 +45,7 @@ class App extends Component {
         return <>
             <ErrorBoundary>
                 <ToastContainer />
-                <MenuBar budget={this.state.selectedBudget} />   
-                {this.state.selectedBudget === undefined ?
-                    <BudgetSelection budgets={this.state.budgets} setBudget={this.state.setBudget}/>
-                :
-                    <BudgetView budget={this.state.selectedBudget}/>
-            }
+                <BudgetView budget={this.state.selectedBudget}/>
             </ErrorBoundary>
         </>
     }

@@ -5,10 +5,11 @@ import AccountView from './Account/AccountView';
 export default function BudgetView({budget}) {
     const [account, setAccount] = useState(undefined);
 
-    if(account === undefined) {
-        return <AccountList budget={budget} setAccount={setAccount} />
-    }
-    else {
-        return <AccountView account={account} />
-    }
+    return <div className="budget-container">
+        <AccountList budget={budget} setAccount={setAccount}/>
+        { account ?
+            <AccountView account={account}/> :
+            null
+        }
+    </div>
 }

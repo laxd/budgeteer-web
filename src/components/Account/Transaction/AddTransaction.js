@@ -31,7 +31,9 @@ function AddTransaction({account, addTransaction}) {
 
         BudgeteerApi.addTransaction(transaction)
             .then((transaction) => {
-                addTransaction(transaction);
+                if(transaction) {
+                    addTransaction(transaction);
+                }
             })
     };
 

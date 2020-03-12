@@ -38,7 +38,8 @@ function AccountList({budget, setAccount}) {
 
     return (
         <>
-        <div className="AccountsContainer">
+        <div className="account-list">
+            Accounts:
             <ul>
                 {accounts.map(account => (
                     <AccountSelection key={account.id} account={account} setAccount={setAccount} />
