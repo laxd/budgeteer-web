@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import AccountSelection from './AccountSelection';
-import './Accounts.css';
+import './Accounts.scss';
 import BudgeteerApi from "../../services/api/BudgeteerApi";
 
-function AccountList({budget, setAccount}) {
+function AccountList({budget}) {
     const [accounts, setAccounts] = useState(undefined);
 
     useEffect(() => {
@@ -14,14 +14,10 @@ function AccountList({budget, setAccount}) {
         BudgeteerApi.getAccountsForBudget(budget)
             .then(async (accounts) => {
                 setAccounts(accounts);
-
-                if(accounts.length > 0) {
-                    setAccount(accounts[0]);
-                }
             });
-    }, [budget, setAccount]);
+    }, [budget]);
 
-    if(accounts === undefined) {
+    if(!accounts) {
         return null;
     }
 
@@ -31,7 +27,7 @@ function AccountList({budget, setAccount}) {
             Accounts:
             <div className="account-list-container">
                 {accounts.map(account => (
-                    <AccountSelection key={account.id} account={account} setAccount={setAccount} />
+                    <AccountSelection key={account.id} account={account} />
                 ))}
             </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatCurrency } from '../../utils/Formatter'
 import classNames from 'classnames';
-import './Accounts.css';
+import './Accounts.scss';
 
 function AccountBalance({transactions}) {
     const balance = transactions

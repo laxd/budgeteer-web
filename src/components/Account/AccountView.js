@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import { useParams } from 'react-router-dom';
+import '../App.scss';
 import BudgeteerApi from '../../services/api/BudgeteerApi'
 import TransactionList from './Transaction/TransactionList';
 import AddTransaction from './Transaction/AddTransaction';
 import AccountBalance from './AccountBalance'
 
-export default function AccountView({ account }) {
+export default function AccountView() {
+    const { id } = useParams();
+
+    const [account, setAccount] = useState(undefined);
     const [transactions, setTransactions] = useState([]);
 
+    useEffect(() => {
+        BudgeteerApi.getAccount(id)
+            .then(account => {
+                setAccount(account);
+
+                BudgeteerApi.getTransactionsForAccount(account)
+                    .then(transactions => setTransactions(transactions));
+            });
+
+    }, [id]);
+
     const addTransaction = (transaction) => {
-        setTransactions(transactions => transactions.concat(transaction))
+        transaction.push(transaction)
     };
 
-    useEffect(() => {
-        BudgeteerApi.getTransactionsForAccount(account)
-            .then(transactions => setTransactions(transactions));
-    }, [account]);
+    if(!account) {
+        return null;
+    }
 
     return (
         <div className="account-container">

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './App.css';
+import './App.scss';
 import BudgeteerApi from "../services/api/BudgeteerApi";
 import BudgetView from './BudgetView';
 import ErrorBoundary from './ErrorBoundary';

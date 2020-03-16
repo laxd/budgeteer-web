@@ -1,13 +1,10 @@
 import React  from 'react'
+import { Link } from 'react-router-dom';
 
-function AccountSelection({ account, setAccount }) {
-
-    const handleAccountSelection = () => {
-        setAccount(account);
-    };
+function AccountSelection({ account }) {
 
     return (
-        <button className="account-list-item" onClick={handleAccountSelection}>{account.name}</button>
+        <Link className="button account-list-item" to={`/accounts/${account.id}`}>{account.name}</Link>
     );
 }
 

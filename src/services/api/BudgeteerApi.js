@@ -27,11 +27,20 @@ class BudgeteerApi {
             });
     };
 
-    async getAccount(id) {
-        return await this.api.get(`/accounts/${id}`).data;
+    getAccount(id) {
+        return this.api.get(`/accounts/${id}`)
+            .then(res => res.data)
+            .catch(err => {
+                handleError(err);
+                return undefined;
+            })
     };
 
     getTransactionsForAccount(account) {
+        if(!account) {
+            throw new Error("Can't get transactions for undefined account!");
+        }
+
         return this.api.get(account.links.transactions)
             .then(res => res.data)
             .catch(err => {
