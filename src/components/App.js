@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.scss';
 import BudgeteerApi from "../services/api/BudgeteerApi";
-import BudgetView from './BudgetView';
+import BudgetView from './Content';
 import ErrorBoundary from './ErrorBoundary';
 import { ToastContainer } from 'react-toastify';
 

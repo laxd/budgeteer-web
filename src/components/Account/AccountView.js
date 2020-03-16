@@ -32,7 +32,7 @@ export default function AccountView() {
     }
 
     return (
-        <div className="account-container">
+        <div className="account-container content">
             <AccountBalance transactions={transactions} />
             <TransactionList transactions={transactions} />
             <AddTransaction account={account} addTransaction={addTransaction}/>
